@@ -1,59 +1,47 @@
-
 # Standard
-NAME				= push_swap
+NAME        = push_swap
+NAME_BONUS = checker
 
 # Directories
-INC					= inc/
-SRC_DIR				= srcs/
-OBJ_DIR				= obj/
+INC         = inc/
+SRC_DIR     = srcs/
 
 # Compiler and CFlags
-CC					= gcc
-CFLAGS = -Wall -Werror -Wextra -I
-RM					= rm -rf
+CC          = cc
+CFLAGS      = -Wall -Werror -Wextra -I$(INC)
+RM          = rm -rf
 
 # Source Files
-COMMANDS_DIR		=	$(SRC_DIR)commands/push.c \
-						$(SRC_DIR)commands/rev_rotate.c \
-						$(SRC_DIR)commands/rotate.c \
-						$(SRC_DIR)commands/swap.c
+SRC = $(SRC_DIR)commands/push.c $(SRC_DIR)commands/rev_rotate.c $(SRC_DIR)commands/rotate.c $(SRC_DIR)commands/swap.c \
+      $(SRC_DIR)push_swap/from_b_to_a.c $(SRC_DIR)push_swap/sort_stack.c $(SRC_DIR)push_swap/sort_three.c $(SRC_DIR)push_swap/sort_utils.c \
+      $(SRC_DIR)push_swap/ft_split.c $(SRC_DIR)push_swap/add_stack.c $(SRC_DIR)push_swap/free_error.c \
+      $(SRC_DIR)push_swap/push_swap.c $(SRC_DIR)push_swap/stack_utils.c \
 
-PUSH_SWAP_DIR		=	$(SRC_DIR)push_swap/from_b_to_a.c \
-						$(SRC_DIR)push_swap/sort_stack.c \
-						$(SRC_DIR)push_swap/sort_three.c \
-						$(SRC_DIR)push_swap/sort_utils.c \
-						$(SRC_DIR)push_swap/ft_split.c \
-						$(SRC_DIR)push_swap/add_stack.c \
-						$(SRC_DIR)push_swap/free_error.c \
-						$(SRC_DIR)push_swap/push_swap.c \
-						$(SRC_DIR)push_swap/stack_utils.c \
+SRC_BONUS = $(SRC_DIR)checker/get_next_line.c $(SRC_DIR)checker/get_next_line_utils.c $(SRC_DIR)checker/checker.c \
+			$(SRC_DIR)push_swap/ft_split.c $(SRC_DIR)push_swap/add_stack.c $(SRC_DIR)push_swap/sort_three.c \
 
-# Concatenate all source files
-SRCS 				= $(COMMANDS_DIR) $(PUSH_SWAP_DIR)
+OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-# Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
-OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
+all: $(NAME)
 
-# Build rules
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-all: 				$(NAME)
+bonus: $(NAME_BONUS)
 
-$(NAME): 			$(OBJ)
-					@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME_BONUS): $(OBJ_BONUS) $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) $(OBJ) -o $(NAME_BONUS)
 
-
-# Compile object files from source files
-$(OBJ_DIR)%.o:		$(SRC_DIR)%.c 
-					@mkdir -p $(@D)
-					@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+%.o: %.c push_swap.h
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-					@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ) $(OBJ_BONUS)
 
-fclean: 			clean
-					@$(RM) $(NAME)
+fclean: clean
+	@$(RM) $(NAME) $(NAME_BONUS)
 
-re: 				fclean all
+re: fclean all
 
-# Phony targets represent actions not files
-.PHONY: 			all clean fclean re
+.PHONY: all clean fclean re bonus

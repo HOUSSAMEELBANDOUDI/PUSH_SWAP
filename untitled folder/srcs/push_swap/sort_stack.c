@@ -59,7 +59,7 @@ void	ft_move_to_b(t_stack_node **a, t_stack_node **b)
 	if (!(cheapest->above_median) && !(cheapest->target_node->above_median))
 		ft_double_rev_rotate(a, b, cheapest);
 	ft_push_to_top_a(a, cheapest);
-	ft_push_to_top_b(b, cheapest->target_node);
+	ft_push_to_top_b(b, cheapest);
 	pb(b, a, false);
 }
 

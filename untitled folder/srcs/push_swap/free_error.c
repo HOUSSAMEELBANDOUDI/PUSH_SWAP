@@ -59,16 +59,7 @@ int	ft_repetion(t_stack_node *head, int value)
 	}
 	return (0);
 }
-void	ft_free_matrix(char **argv, bool split)
-{
-	int	i;
-	i = 0;
-	if (!split)
-		return ;
-	while (argv[i])
-		free(argv[i++]);
-	free(argv);	
-}
+
 void	ft_free_errors(t_stack_node **stack)
 {
 	ft_free_stack(stack);

@@ -74,26 +74,16 @@ void	ft_delete_first(t_stack_node **head)
 	free(current);
 }
 
-void	ft_add_begginer(t_stack_node **dst, t_stack_node **src)
+void	ft_add_begginer(t_stack_node **stack_a, t_stack_node **stack_b)
 {
-	t_stack_node	*push_node;
+	t_stack_node	*current;
 
-	if (!*src)
+	if (!stack_b || !*stack_b)
 		return ;
-	push_node = *src;
-	*src = (*src)->next;
-	if (*src)
-		(*src)->prev = NULL;
-	push_node->prev = NULL;
-	if (!*dst)
-	{
-		*dst = push_node;
-		push_node->next = NULL;
-	}
-	else
-	{
-		push_node->next = *dst;
-		push_node->next->prev = push_node;
-		*dst = push_node;
-	}
+	current = *stack_b;
+	ft_delete_first(stack_b);
+	current->next = *stack_a;
+	if (*stack_a != NULL)
+		(*stack_a)->prev = current;
+	*stack_a = current;
 }

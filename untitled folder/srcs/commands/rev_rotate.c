@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	ft_rev_rotate(t_stack_node **stack)
+void	ft_rev_rotate(t_stack_node **stack)
 {
 	t_stack_node	*lst;
 
@@ -48,8 +48,7 @@ void	rrr(t_stack_node **a, t_stack_node **b, bool checker)
 		write(1, "rrr\n", 4);
 }
 
-void	ft_double_rev_rotate(t_stack_node **a, t_stack_node **b,
-t_stack_node *cheapest)
+void	ft_double_rev_rotate(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest)
 {
 	while (*a != cheapest && *b != cheapest->target_node)
 	{
