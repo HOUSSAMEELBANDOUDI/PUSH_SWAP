@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_stack.c                                        :+:      :+:    :+:   */
+/*   add_stack_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 10:49:18 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/15 17:08:00 by hel-band         ###   ########.fr       */
+/*   Created: 2024/03/01 10:09:45 by hel-band          #+#    #+#             */
+/*   Updated: 2024/03/01 10:11:24 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-long	ft_atoi(const char *str)
+static long	ft_atoi_bonus(const char *str)
 {
 	int		i;
 	int		sign;
@@ -38,7 +38,7 @@ long	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-void	add_stack_a(t_stack_node **a, char **argv)
+void	add_stack_a_bonus(t_stack_node **a, char **argv)
 {
 	int	i;
 	int	value;
@@ -46,14 +46,14 @@ void	add_stack_a(t_stack_node **a, char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		if (ft_error_syntax(argv[i]))
-			ft_free_errors(a);
-		value = ft_atoi(argv[i]);
+		if (ft_error_syntax_bonus(argv[i]))
+			ft_free_errors_bonus(a);
+		value = ft_atoi_bonus(argv[i]);
 		if (value > INT_MAX || value < INT_MIN)
-			ft_free_errors(a);
-		if (ft_repetion(*a, value))
-			ft_free_errors(a);
-		ft_add_end(a, value);
+			ft_free_errors_bonus(a);
+		if (ft_repetion_bonus(*a, value))
+			ft_free_errors_bonus(a);
+		ft_add_end_bonus(a, value);
 		i++;
 	}
 }

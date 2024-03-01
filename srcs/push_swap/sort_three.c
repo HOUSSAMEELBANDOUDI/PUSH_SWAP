@@ -6,7 +6,7 @@
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:23:19 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/16 13:10:05 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:49:02 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ bool	ft_is_sorted(t_stack_node *stack)
 		stack = stack->next;
 	}
 	return (1);
+}
+
+void	ft_check_sort(t_stack_node **a, t_stack_node **b)
+{
+	if (!ft_is_sorted(*a))
+	{
+		if (ft_stack_len(*a) == 2)
+			sa(a, false);
+		else if (ft_stack_len(*a) == 3)
+			ft_sort_three(a);
+		else
+			ft_sort_stack(a, b);
+	}
 }

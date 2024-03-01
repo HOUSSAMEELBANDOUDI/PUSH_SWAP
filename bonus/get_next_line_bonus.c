@@ -6,11 +6,11 @@
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:21:33 by hel-band          #+#    #+#             */
-/*   Updated: 2023/11/22 11:25:57 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:58:09 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 char	*ft_result(char **str, char **dst, int i)
 {
@@ -37,7 +37,7 @@ char	*ft_get_line(char **str, char **dst, char **buffer, int fd)
 	byt_read = read(fd, *buffer, BUFFER_SIZE);
 	while (byt_read >= 0)
 	{
-		(*buffer)[byt_read] = '\0'; 
+		(*buffer)[byt_read] = '\0';
 		*str = ft_strjoin(*str, *buffer);
 		nl = ft_index(*str);
 		if (nl != -1)

@@ -6,7 +6,7 @@
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:43:54 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/13 17:36:10 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:21:05 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,19 @@ int	ft_repetion(t_stack_node *head, int value)
 	}
 	return (0);
 }
+
 void	ft_free_matrix(char **argv, bool split)
 {
 	int	i;
+
 	i = 0;
 	if (!split)
 		return ;
 	while (argv[i])
 		free(argv[i++]);
-	free(argv);	
+	free(argv);
 }
+
 void	ft_free_errors(t_stack_node **stack)
 {
 	ft_free_stack(stack);

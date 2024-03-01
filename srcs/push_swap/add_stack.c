@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static long	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;
@@ -41,7 +41,7 @@ static long	ft_atoi(const char *str)
 void	add_stack_a(t_stack_node **a, char **argv)
 {
 	int	i;
-	int	value;
+	long	value;
 
 	i = 0;
 	while (argv[i])

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_error.c                                       :+:      :+:    :+:   */
+/*   free_error_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:43:54 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/13 17:36:10 by hel-band         ###   ########.fr       */
+/*   Created: 2024/03/01 10:13:00 by hel-band          #+#    #+#             */
+/*   Updated: 2024/03/01 10:14:41 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-int	ft_error_syntax(char *str_nbr)
+int	ft_error_syntax_bonus(char *str_nbr)
 {
 	if (!(*str_nbr == '+'
 			|| *str_nbr == '-'
@@ -30,7 +30,7 @@ int	ft_error_syntax(char *str_nbr)
 	return (0);
 }
 
-void	ft_free_stack(t_stack_node **stack)
+void	ft_free_stack_bonus(t_stack_node **stack)
 {
 	t_stack_node	*current;
 	t_stack_node	*tmp;
@@ -47,7 +47,7 @@ void	ft_free_stack(t_stack_node **stack)
 	*stack = NULL;
 }
 
-int	ft_repetion(t_stack_node *head, int value)
+int	ft_repetion_bonus(t_stack_node *head, int value)
 {
 	if (!head)
 		return (0);
@@ -60,9 +60,21 @@ int	ft_repetion(t_stack_node *head, int value)
 	return (0);
 }
 
-void	ft_free_errors(t_stack_node **stack)
+void	ft_free_matrix_bonus(char **argv, bool split)
 {
-	ft_free_stack(stack);
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
+	while (argv[i])
+		free(argv[i++]);
+	free(argv);
+}
+
+void	ft_free_errors_bonus(t_stack_node **stack)
+{
+	ft_free_stack_bonus(stack);
 	write(1, "Error\n", 6);
 	exit(1);
 }

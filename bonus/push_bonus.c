@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 18:40:04 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/15 18:42:03 by hel-band         ###   ########.fr       */
+/*   Created: 2024/03/01 10:36:37 by hel-band          #+#    #+#             */
+/*   Updated: 2024/03/01 10:37:27 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-int	main(int argc, char **argv)
+void	pa_bonus(t_stack_node **a, t_stack_node **b, bool checker)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
+	ft_add_begginer_bonus(a, b);
+	if (!checker)
+		write(1, "pa\n", 3);
+}
 
-	b = NULL;
-	a = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	add_stack_a(&a, argv + 1);
-	if (!ft_is_sorted(a))
-		ft_sort_stack(&a, &b);
-		
-} 
+void	pb_bonus(t_stack_node **b, t_stack_node **a, bool checker)
+{
+	ft_add_begginer_bonus(b, a);
+	if (!checker)
+		write(1, "pb\n", 3);
+}

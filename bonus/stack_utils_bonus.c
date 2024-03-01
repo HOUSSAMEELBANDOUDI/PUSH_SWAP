@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   stack_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 13:10:24 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/15 17:19:35 by hel-band         ###   ########.fr       */
+/*   Created: 2024/03/01 10:21:29 by hel-band          #+#    #+#             */
+/*   Updated: 2024/03/01 10:23:48 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker_bonus.h"
 
-t_stack_node	*ft_find_last_node(t_stack_node *head)
+t_stack_node	*ft_find_last_node_bonus(t_stack_node *head)
 {
 	if (!head)
 		return (NULL);
@@ -21,7 +21,7 @@ t_stack_node	*ft_find_last_node(t_stack_node *head)
 	return (head);
 }
 
-void	ft_add_end(t_stack_node **stack, int value)
+void	ft_add_end_bonus(t_stack_node **stack, int value)
 {
 	t_stack_node	*current;
 	t_stack_node	*last;
@@ -40,13 +40,13 @@ void	ft_add_end(t_stack_node **stack, int value)
 	}
 	else
 	{
-		last = ft_find_last_node(*stack);
+		last = ft_find_last_node_bonus(*stack);
 		last->next = current;
 		current->prev = last;
 	}
 }
 
-int	ft_stack_len(t_stack_node *stack)
+int	ft_stack_len_bonus(t_stack_node *stack)
 {
 	int	count;
 
@@ -61,7 +61,7 @@ int	ft_stack_len(t_stack_node *stack)
 	return (count);
 }
 
-void	ft_delete_first(t_stack_node **head)
+void	ft_delete_first_bonus(t_stack_node **head)
 {
 	t_stack_node	*current;
 
@@ -74,16 +74,26 @@ void	ft_delete_first(t_stack_node **head)
 	free(current);
 }
 
-void	ft_add_begginer(t_stack_node **stack_a, t_stack_node **stack_b)
+void	ft_add_begginer_bonus(t_stack_node **dst, t_stack_node **src)
 {
-	t_stack_node	*current;
+	t_stack_node	*push_node;
 
-	if (!stack_b || !*stack_b)
+	if (!*src)
 		return ;
-	current = *stack_b;
-	ft_delete_first(stack_b);
-	current->next = *stack_a;
-	if (*stack_a != NULL)
-		(*stack_a)->prev = current;
-	*stack_a = current;
+	push_node = *src;
+	*src = (*src)->next;
+	if (*src)
+		(*src)->prev = NULL;
+	push_node->prev = NULL;
+	if (!*dst)
+	{
+		*dst = push_node;
+		push_node->next = NULL;
+	}
+	else
+	{
+		push_node->next = *dst;
+		push_node->next->prev = push_node;
+		*dst = push_node;
+	}
 }
