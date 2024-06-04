@@ -39,7 +39,6 @@ void			ft_free_errors(t_stack_node **a);
 void			ft_free_matrix(char **argv, bool split);
 void			add_stack_a(t_stack_node **a, char **argv);
 char			**ft_split(char *s, char c);
-
 void			ft_add_end(t_stack_node **stack, int value);
 t_stack_node	*ft_find_last_node(t_stack_node *head);
 int				ft_stack_len(t_stack_node *stack);

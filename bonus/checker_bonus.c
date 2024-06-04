@@ -6,11 +6,12 @@
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 18:18:58 by hel-band          #+#    #+#             */
-/*   Updated: 2024/03/01 17:07:37 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:50:49 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+
 int	ft_strcmp_bonus(char *str1, char *str2)
 {
 	while (*str1 == *str2 && *str1)
@@ -55,44 +56,33 @@ void	ft_check_bonus(t_stack_node **a, t_stack_node **b, char *line)
 		rrr_bonus(a, b, true);
 	else
 		ft_mistake_bonus(a, b);
+	free(line);
 }
-void    leaks()
-{
-    system("leaks checker");
-}
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
 	t_stack_node	*b;
-	char			*next_line;
-	int				len;
-	bool			split;
+	char			**spl;
+	int				i;
 
 	b = NULL;
 	a = NULL;
-	split = 0;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
+	i = 1;
+	while (argv[i] && argc > 1)
 	{
-		argv = ft_split_bonus(argv[1], ' ');
-		split = 1;
+		if (!argv[i][0] || argv[i][0] == 32)
+		{
+			ft_free_stack_bonus(&a);
+			write(1, "Error\n", 6);
+			return (0);
+		}
+		spl = ft_split_bonus(argv[i], ' ');
+		add_stack_a_bonus(&a, spl);
+		i++;
+		ft_free_matrix_bonus(spl, 1);
 	}
-	add_stack_a_bonus(&a, argv + 1);
-	len = ft_stack_len_bonus(a);
-	next_line = get_next_line(0);
-	while (next_line)
-	{
-		ft_check_bonus(&a, &b, next_line);
-		next_line = get_next_line(0);
-	}
-	if (ft_is_sorted_bonus(a) && ft_stack_len_bonus(a) == len)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	ft_process_commands_bonus(&a, &b);
 	ft_free_stack_bonus(&a);
 	ft_free_stack_bonus(&b);
-	ft_free_matrix_bonus(argv, split);
-	free(next_line);
-	atexit(leaks);
-} 
+}

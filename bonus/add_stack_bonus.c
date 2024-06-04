@@ -40,8 +40,8 @@ static long	ft_atoi_bonus(const char *str)
 
 void	add_stack_a_bonus(t_stack_node **a, char **argv)
 {
-	int	i;
-	int	value;
+	int		i;
+	long	value;
 
 	i = 0;
 	while (argv[i])

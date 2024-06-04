@@ -25,21 +25,6 @@ bool	ft_is_sorted_bonus(t_stack_node *stack)
 	return (1);
 }
 
-void	ft_initialize_stack_bonus(int argc, char **argv,
-			t_stack_node **a, bool *split)
-{
-	*a = NULL;
-	*split = false;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		exit(1);
-	else if (argc == 2)
-	{
-		argv = ft_split_bonus(argv[1], ' ');
-		*split = true;
-	}
-	add_stack_a_bonus(a, argv + 1);
-}
-
 void	ft_process_commands_bonus(t_stack_node **a, t_stack_node **b)
 {
 	char	*next_line;

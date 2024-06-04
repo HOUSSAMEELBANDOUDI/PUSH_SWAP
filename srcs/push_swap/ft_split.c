@@ -6,16 +6,27 @@
 /*   By: hel-band <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:54:24 by hel-band          #+#    #+#             */
-/*   Updated: 2024/02/29 11:30:18 by hel-band         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:17:53 by hel-band         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	count_words(char *str, char c)
+char	**ft_check(char **str)
 {
-	int	count;
 	int	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	return (NULL);
+}
+
+size_t	ft_countworld(char *str, char c)
+{
+	size_t	count;
+	size_t	i;
 
 	count = 0;
 	i = 0;
@@ -33,53 +44,60 @@ int	count_words(char *str, char c)
 	return (count);
 }
 
-char	*get_next_word(char *str, char separator)
+size_t	ft_len(char *str, char c)
 {
-	static int	cursor;
-	char		*next_str;
-	int			len;
-	int			i;
+	size_t	j;
 
-	len = 0;
-	i = 0;
-	while (str[cursor] == separator)
-		++cursor;
-	while ((str[cursor + len] != separator) && str[cursor + len])
-		++len;
-	next_str = malloc((len + 1) * sizeof(char));
-	if (NULL == next_str)
-		return (NULL);
-	while ((str[cursor] != separator) && str[cursor])
-		next_str[i++] = str[cursor++];
-	next_str[i] = '\0';
-	return (next_str);
+	j = 0;
+	while (str[j] && str[j] != c)
+		j++;
+	return (j);
 }
 
-char	**ft_split(char *str, char separator)
+char	*ft_world(char *str, char c)
 {
-	int		words_number;
-	char	**vector_strings;
-	int		i;
+	char	*dst;
+	size_t	i;
 
-	i = 0;
-	words_number = count_words(str, separator);
-	if (!words_number)
-		exit(1);
-	vector_strings = (char **)malloc(sizeof(char *) * ((words_number + 2)));
-	if (NULL == vector_strings)
-		return (NULL);
-	while (words_number-- >= 0)
+	dst = (char *)malloc((ft_len(str, c) + 1) * sizeof(char));
+	if (!dst)
 	{
-		if (0 == i)
-		{
-			vector_strings[i] = malloc(sizeof(char));
-			if (NULL == vector_strings[i])
-				return (NULL);
-			vector_strings[i++][0] = '\0';
-			continue ;
-		}
-		vector_strings[i++] = get_next_word(str, separator);
+		return (NULL);
 	}
-	vector_strings[i] = NULL;
-	return (vector_strings);
+	i = 0;
+	while (str[i] && str[i] != c)
+	{
+		dst[i] = str[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	**ft_split(char *s, char c)
+{
+	char	**dst;
+	size_t	i;
+	size_t	j;
+
+	if (!s)
+		return (NULL);
+	j = ft_countworld(s, c);
+	dst = (char **)malloc((ft_countworld(s, c) + 1) * sizeof(char *));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (*s && i < j)
+	{
+		while (*s == c)
+			s++;
+		dst[i] = ft_world(s, c);
+		if (!dst[i])
+			return (ft_check(dst));
+		i++;
+		while (*s != c && *s)
+			s++;
+	}
+	dst[i] = 0;
+	return (dst);
 }

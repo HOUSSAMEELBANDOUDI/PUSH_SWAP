@@ -46,8 +46,6 @@ void			rrb_bonus(t_stack_node **b, bool print);
 void			rrr_bonus(t_stack_node **a, t_stack_node **b, bool print);
 void			pa_bonus(t_stack_node **a, t_stack_node **b, bool print);
 void			pb_bonus(t_stack_node **b, t_stack_node **a, bool print);
-void			ft_initialize_stack_bonus(int argc, char **argv,
-					t_stack_node **a, bool *split);
 void			ft_process_commands_bonus(t_stack_node **a, t_stack_node **b);
 
 bool			ft_is_sorted_bonus(t_stack_node *stack);
